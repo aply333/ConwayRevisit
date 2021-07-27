@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+    position: relative;
+}
+
+
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 0;
+}
+
+#controls {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(#f9f8f0, 0.8);
+  top: 3rem;
+  right: 5vw;
+  width: 15rem;
+  height: 8rem;
+  border-radius: 8px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 12.3px 17.9px rgba(0, 0, 0, 0.072), 0 12.8px 15.4px rgba(0, 0, 0, 0.086),
+    0 30px 40px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: space-around;
+  button {
+    margin: 10px auto;
+    width: 40%;
+    height: 2.5rem;
+    background-color: #437c90;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+  }
+}
+
+#presets {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(#f9f8f0, 0.8);
+  top: 12rem;
+  right: 5vw;
+  width: 15rem;
+  height: 30rem;
+  border-radius: 8px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 12.3px 17.9px rgba(0, 0, 0, 0.072), 0 12.8px 15.4px rgba(0, 0, 0, 0.086),
+    0 30px 40px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  h1{
+      font-size: 1.5rem;
+      text-align: center;
+      width: 80%;
+  }
+  hr{
+      width: 60%;
+  }
+  p{
+      width: 90%;
+  }
+}
