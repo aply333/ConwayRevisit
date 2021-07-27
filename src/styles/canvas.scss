@@ -47,14 +47,14 @@ body{
   }
 }
 
-#presets {
+#about {
   position: absolute;
   z-index: 1;
   background-color: rgba(#f9f8f0, 0.8);
   top: 12rem;
   right: 5vw;
   width: 15rem;
-  height: 30rem;
+  height: 20rem;
   border-radius: 8px;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
@@ -63,6 +63,8 @@ body{
   display: flex;
   flex-flow: column;
   align-items: center;
+  transition: all .5s ease-in-out;
+  overflow: hidden;
   h1{
       font-size: 1.5rem;
       text-align: center;
@@ -71,7 +73,21 @@ body{
   hr{
       width: 60%;
   }
+  button{
+    background-color: #437c90;
+    color: white;
+    border: none;
+    
+  }
   p{
       width: 90%;
   }
+  &:hover{
+    height: 50rem;
+ 
+  }
+}
+
+#options{
+  background-color: pink;
 }

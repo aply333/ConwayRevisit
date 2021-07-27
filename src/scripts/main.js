@@ -18,6 +18,7 @@
 */
 
 import Cell from "./cells.js";
+import InsertPreset,{beacon, beehive, blinker, block, boat, glider, hwship, loaf, lwship, mwship, penta, pulsar, toad, tub} from "./presets.js";
 
 const canvas = document.getElementById("gameCanvas");
 let ctx = canvas.getContext("2d");
@@ -29,41 +30,42 @@ let gridArray = Array.from(
   Array(Math.floor(viewHeight / gridSize)),
   () => new Array(Math.floor(viewWidth / gridSize))
 );
-let gridWidth = gridArray[0].length;
-let gridHeight = gridArray.length;
+
 let active = [];
 let running = false;
 let speed = 0;
 
-function populateGrid(matrix) {
-  for (let y = 0; y < matrix.length; y++) {
-    for (let x = 0; x < matrix[y].length; x++) {
-      let newCell = new Cell(x, y);
-      matrix[y][x] = newCell;
-      matrix[y][x].renderCell(ctx, gridSize);
-    }
-  }
-}
-function determinStatus(matrix) {
-  for (let y = 0; y < matrix.length; y++) {
-    for (let x = 0; x < matrix[y].length; x++) {
-      matrix[y][x].renderCell(ctx, gridSize);
-      if (running === true) {
-        matrix[y][x].findNeighbors(matrix);
-      }
+function matrixLoop(matrix, callback){
+  for (let y = 0; y < matrix.length; y++){
+    for (let x = 0; x < matrix[y].length; x++){
+      callback(x,y)
     }
   }
 }
 
-function updateMatrix(matrix) {
-  for (let y = 0; y < matrix.length; y++) {
-    for (let x = 0; x < matrix[y].length; x++) {
-      matrix[y][x].renderCell(ctx, gridSize);
-      if (running === true) {
-        matrix[y][x].updateGeneration();
-      }
+function populateGrid(matrix) {
+  matrixLoop(matrix, (x,y)=>{
+    let newCell = new Cell(x, y);
+    matrix[y][x] = newCell;
+    matrix[y][x].renderCell(ctx, gridSize);
+  })
+}
+function determinStatus(matrix) {
+  matrixLoop(matrix,(x,y)=>{
+    matrix[y][x].renderCell(ctx, gridSize);
+    if (running === true) {
+      matrix[y][x].findNeighbors(matrix);
     }
-  }
+  })
+}
+
+function updateMatrix(matrix) {
+  matrixLoop(matrix, (x,y) =>{
+    matrix[y][x].renderCell(ctx, gridSize);
+    if (running === true) {
+      matrix[y][x].updateGeneration();
+    }
+  })
 }
 
 function setBoard() {
@@ -74,14 +76,12 @@ function setBoard() {
   viewWidth = window.innerWidth;
   viewHeight = window.innerHeight;
   gridArray = Array.from(
-    Array(viewHeight % gridSize),
-    () => new Array(viewWidth % gridSize)
+    Array(Math.floor(viewHeight / gridSize)),
+    () => new Array(Math.floor(viewWidth / gridSize))
   );
   populateGrid(gridArray);
   active = gridArray;
 }
-
-console.log(gridHeight, gridWidth);
 
 setBoard();
 window.addEventListener("resize", setBoard);
@@ -99,6 +99,7 @@ function clickHandler(e) {
 canvas.addEventListener("click", (e) => clickHandler(e));
 const startButton = document.getElementById("start");
 const pauseButton = document.getElementById("pause");
+const resetButton = document.getElementById("reset");
 
 startButton.addEventListener("click", () => {
   running = true;
@@ -106,15 +107,66 @@ startButton.addEventListener("click", () => {
 pauseButton.addEventListener("click", () => {
   running = false;
   speed = 0;
-  console.log(active);
 });
+resetButton.addEventListener("click", ()=>{
+  running = false;
+  setBoard()
+})
 
 function runtimeHandler() {
   if (running === true) {
     speed = 5000;
-    console.log("Sim Running");
   }
 }
+
+const dropDown = document.getElementById("presets");
+const setButton = document.getElementById("set");
+
+setButton.addEventListener("click", ()=>{
+  setBoard()
+  if(dropDown.value === "blinker"){
+    InsertPreset(active, blinker)
+  }
+  if(dropDown.value === "block"){
+    InsertPreset(active, block)
+  }
+  if(dropDown.value === "beehive"){
+    InsertPreset( active, beehive)
+  }
+  if(dropDown.value === "loaf"){
+    InsertPreset(active, loaf)
+  }
+  if(dropDown.value === "boat"){
+    InsertPreset(active, boat)
+  }
+  if(dropDown.value === "tub"){
+    InsertPreset(active, tub)
+  }
+  if(dropDown.value === "toad"){
+    InsertPreset(active, toad)
+  }
+  if(dropDown.value === "beacon"){
+    InsertPreset(active, beacon)
+  }
+  if(dropDown.value === "pulsar"){
+    InsertPreset(active, pulsar)
+  }
+  if(dropDown.value === "penta"){
+    InsertPreset(active, penta)
+  }
+  if(dropDown.value === "glider"){
+    InsertPreset(active, glider)
+  }
+  if(dropDown.value === "lwship"){
+    InsertPreset(active, lwship)
+  }
+  if(dropDown.value === "midship"){
+    InsertPreset(active, mwship)
+  }
+  if(dropDown.value === "hvyship"){
+    InsertPreset(active, hwship)
+  }
+})
 
 let frame = 0;
 let framLimit = 10;

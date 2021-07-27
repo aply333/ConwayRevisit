@@ -12,19 +12,50 @@
     <div id="controls">
         <button id="start">►</button>
         <button id="pause">▣</button>
-        <!-- too implement -->
         <button id="reset">⟳</button>
     </div>
-    <div id="presets">
+    <div id="about">
         <h1>Conway's Game of Life</h1>
         <hr />
         <span>
-            <button>About</button>
-            <button>Presets</button>
+            <select name="Presets" id="presets">
+                <optgroup label="Still Life">
+                <option value="block">Block</option>
+                <option value="beehive">Beehive</option>
+                <option value="loaf">Loaf</option>
+                <option value="boat">Boat</option>
+                <option value="tub">Tub</option>
+            </optgroup>
+            <optgroup label="Oscillators">
+                <option value="blinker">Blinker</option>
+                <option value="toad">Toad</option>
+                <option value="beacon">Beacon</option>
+                <option value="pulsar">Pulsar</option>
+                <option value="penta">Penta-decathlon</option>
+            </optgroup>
+            <optgroup label="Space Ships"> 
+                <option value="glider">Glider</option>
+                <option value="lwship">Light Weight Ship</option>
+                <option value="midship">Middle Weight Ship</option>
+                <option value="hvyship">Heavy Weight Ship</option>
+            </optgroup>
+            </select>
+            <button id="set">+</button>
         </span>
         <p>
-            About the game of life stuff and things yata yata.
+            A game that isn't played. Divised by John Conway in 1970, where you define its initial state, then following three simple rules it will work from there.
         </p>
+        <ol>
+            <li>Any live cell with two or three live neighbours survives.</li>
+            <li>Any dead cell with three live neighbours becomes a live cell.</li>
+            <li>All other live cells die in the next generation. Similarly, all other dead cells stay dead.</li>
+        </ol>
+        <p>
+            It is Turing Complete, which as a result one can recreate the game with the use of the game itself. <a href="https://www.conwaylife.com/wiki/OTCA_metapixel" target="_blank">OTCA metapixel</a>
+        </p>
+    </div>
+    <div id="options">
+
     </div>
     <canvas id="gameCanvas">
        
